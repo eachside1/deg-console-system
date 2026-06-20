@@ -190,6 +190,12 @@
 
 <script>
   var content=document.getElementById('content');
+  // escape user-controlled strings before any innerHTML insertion (XSS guard)
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
   // reset center to empty idle state (clears any output/input card)
   function resetContent(){
     content.className='content idle show';
@@ -257,13 +263,13 @@
   function submit(){
     var v=txt.value.trim();
     if(!v && files.length===0) return;
-    var fileChips = files.map(function(f){return '<span class="chip">\u{1F4CE} '+f.name+'</span>'}).join('');
+    var fileChips = files.map(function(f){return '<span class="chip">\u{1F4CE} '+escapeHTML(f.name)+'</span>'}).join('');
     content.classList.remove('show');
     setTimeout(function(){
       content.className='content show';
       content.innerHTML='<div class="ctag"><span class="d" style="background:var(--c-in)"></span>Input received</div>'+
         '<h2>Submitted to engine</h2>'+
-        (v? '<div class="sub">'+v.replace(/</g,'&lt;')+'</div>':'<div class="sub">Attachment(s) submitted.</div>')+
+        (v? '<div class="sub">'+escapeHTML(v)+'</div>':'<div class="sub">Attachment(s) submitted.</div>')+
         (fileChips? '<div class="files">'+fileChips+'</div>':'')+
         '<div class="cls">Status &middot; <b>Queued (engine in test mode)</b></div>';
     },170);
