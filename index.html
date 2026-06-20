@@ -230,6 +230,10 @@
       e.stopPropagation();
       document.querySelectorAll('.side .body li').forEach(function(o){o.classList.remove('sel')});
       li.classList.add('sel');
+      if(window.matchMedia('(max-width:760px)').matches){
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('menuToggle').classList.remove('open');
+      }
       var col=li.closest('.grp').querySelector('.tag').style.background;
       var t=li.getAttribute('data-t'), c=li.getAttribute('data-c');
       content.classList.remove('show');
