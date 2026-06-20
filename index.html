@@ -119,12 +119,15 @@
     padding-left:6px;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis}
 
   @media(max-width:760px){
-    body{background-attachment:scroll;background-position:center center}
-    .menu-toggle{top:14px;left:14px}
-    .side{top:56px;left:14px;width:64vw;max-width:240px;max-height:74vh;
+    html,body{height:auto;min-height:100%}
+    body{overflow-y:auto;overflow-x:hidden;
+      background-attachment:scroll;background-position:center center;background-size:cover}
+    .menu-toggle{top:15vh;left:14px}
+    .side{top:calc(15vh + 42px);left:14px;width:64vw;max-width:240px;max-height:60vh;
       background:rgba(11,16,30,.97);backdrop-filter:none;-webkit-backdrop-filter:none}
+    .main{height:auto;min-height:100dvh}
     .grp.open .body{max-height:1000px}
-    .barwrap{padding:12px 16px 18px}
+    .barwrap{padding:12px 16px 22px}
   }
 </style>
 </head>
