@@ -129,6 +129,13 @@
     .grp.open .body{max-height:1000px}
     .barwrap{padding:12px 16px 22px}
   }
+  /* graceful fallback: if backdrop-filter unsupported (old browsers), use solid-ish panels so text stays legible */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+    .menu-toggle{background:rgba(9,13,24,.92)}
+    .side{background:rgba(11,16,30,.96)}
+    .content{background:rgba(8,12,22,.90)}
+    .bar{background:rgba(10,15,27,.95)}
+  }
 </style>
 </head>
 <body>
